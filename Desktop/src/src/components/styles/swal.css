@@ -1,0 +1,36 @@
+.swal-overlay {
+    top: 8.5vh;
+    background-color: #ffffff31;
+}
+
+.swal-modal {
+    transform: translate(-1.5vh -1.5vh);
+    background-color: #333;
+    box-shadow: 3vh 3vh #222;
+}
+
+.swal-button {
+    transform: translate(-.5vh .5vh);
+    box-shadow: 1vh 1vh #222;
+}
+
+.swal-button:active {
+    transform: translate(0 0);
+    box-shadow: none;
+}
+
+.swal-title {
+    color: beige;
+}
+
+.swal-modal input {
+    color: #000;
+    background-color: beige;
+    font-weight: bold;
+}
+
+.swal-button--confirm {
+    background-color: #4db68a;
+    color: beige;
+    font-size: large;
+}
