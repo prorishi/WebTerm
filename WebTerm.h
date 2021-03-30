@@ -1,5 +1,5 @@
-#ifndef WebSerial_h
-#define WebSerial_h
+#ifndef WebTerm
+#define WebTerm
 
 #include <Arduino.h>
 
@@ -18,7 +18,7 @@
 AsyncWebServer server(6969);
 AsyncWebSocket socket("/");
 
-void wsRead(String data);
+void wRecv(String data);
 
 void socketEventHandler(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type, void *arg, uint8_t *data, size_t len)
 {
@@ -28,12 +28,12 @@ void socketEventHandler(AsyncWebSocket *server, AsyncWebSocketClient *client, Aw
         if (info->final && info->index == 0 && info->len == len && info->opcode == WS_TEXT)
         {
             data[len] = 0;
-            wsRead(String((char *)data));
+            wRecv(String((char *)data));
         }
     }
 }
 
-void wsWrite(String data = "", bool breakLine = true)
+void wSend(String data = "", bool breakLine = true)
 {
     if (breakLine)
         socket.textAll("\t" + data);
@@ -41,39 +41,39 @@ void wsWrite(String data = "", bool breakLine = true)
         socket.textAll(data);
 }
 
-void wsWrite(char *data, bool breakLine = true)
+void wSend(char *data, bool breakLine = true)
 {
-    wsWrite(String(data), breakLine);
+    wSend(String(data), breakLine);
 }
 
-void wsWrite(int data, bool breakLine = true)
+void wSend(int data, bool breakLine = true)
 {
-    wsWrite(String(data), breakLine);
+    wSend(String(data), breakLine);
 }
 
-void wsWrite(long data, bool breakLine = true)
+void wSend(long data, bool breakLine = true)
 {
-    wsWrite(String(data), breakLine);
+    wSend(String(data), breakLine);
 }
 
-void wsWrite(double data, bool breakLine = true)
+void wSend(double data, bool breakLine = true)
 {
-    wsWrite(String(data), breakLine);
+    wSend(String(data), breakLine);
 }
 
-void wsWrite(float data, bool breakLine = true)
+void wSend(float data, bool breakLine = true)
 {
-    wsWrite(String(data), breakLine);
+    wSend(String(data), breakLine);
 }
 
-void wsInitialize()
+void wInit()
 {
     socket.onEvent(socketEventHandler);
     server.addHandler(&socket);
     server.begin();
 }
 
-void wsRefresh()
+void wRefresh()
 {
     socket.cleanupClients();
 }

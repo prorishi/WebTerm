@@ -1,9 +1,9 @@
-#include <WebSerial.h>
+#include <WebTerm.h>
 
 #define SSID ""             // Replace with the SSID of your NetWork
 #define PWD ""              // Replace with the PassWord of your NetWork
 
-void wsRead(String data) {
+void wRecv(String data) {
     Serial.print("Just received: "); 
     Serial.println(data);
 }
@@ -17,12 +17,12 @@ void setup() {
     Serial.print("\nConnected!\nIP: ");
     Serial.println(WiFi.localIP());
 
-    wsInitialize();
+    wInit();
 }
 
 void loop() {
     if (Serial.available()) {
-        wsWrite(Serial.readString());
+        wSend(Serial.readString());
     }
-    wsRefresh(); // completely optional
+    wRefresh(); // optional
 }

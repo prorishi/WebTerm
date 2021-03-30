@@ -1784,13 +1784,13 @@
             });
         </script>
 
-        <title>WebSerial</title>
+        <title>WebTerm</title>
     </head>
 
     <body>
         <div id="header">
             <div id="title">
-                <div>WebSerial</div>
+                <div>WebTerm</div>
                 <span id="IP"></span>
             </div>
 
@@ -1845,9 +1845,10 @@
                     },
                     closeOnClickOutside: false,
                 }).then((value) => {
-                    if (value) {
-                        if (isValid(value)) {
-                            IP = value;
+                    let ip = value.replace(/ /ig, '')
+                    if (ip) {
+                        if (isValid(ip)) {
+                            IP = ip;
                             main();
                         } else {
                             swal({
